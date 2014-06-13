@@ -1,10 +1,88 @@
-﻿:host {
-  display: block;
-}
-
-/* To ensure your styling works under the Shadow DOM polyfill, see
+﻿/* To ensure your styling works under the Shadow DOM polyfill, see
    www.polymer-project.org/docs/polymer/styling.html#directives */
 polyfill-next-selector { content: ':host > h2'; }
 ::content h2 {
   color: blue;
 }
+
+.arrow_box_2 {
+                position: relative;
+                background: #3cd5c6;
+                border: 2px solid #b83e87;
+                height: 65px;
+                min-width: 200px;
+                box-sizing: border-box;
+                border-radius: 5px;
+                text-align: center;
+                line-height: 60px;
+                display: inline-block;
+                transition: All 1s ease;
+            }
+
+            .clicked.arrow_box_2 {
+                height: 200px;
+                transition: All 1s ease;
+            }
+
+            .clicked.arrow_box_2 img {
+                height: 90%;
+                margin: 10px;
+                 transition: All 1s ease;
+            }
+
+            .clicked .text {
+                opacity: 0;
+                position: absolute;
+                right: 0;
+                transition: All 0s ease;
+            }
+
+            .text {
+                opacity: 1;
+                position: relative;
+                transition: All 1s ease;
+            }
+
+            .clicked.arrow_box_2:before {
+                width: 0px;
+                height: 0px;
+                margin-left: 0;
+                top: 50%;
+                transition: All 1s ease;
+            }
+
+            .arrow_box_2 .img {
+                background-size: auto 50%;
+                height: 100%;
+                left: 5px;
+                content: '';
+                float: left;
+                padding: 0 5px;
+                transition: All 1s ease;
+            }
+
+            .arrow_box_2 .img img {
+                vertical-align: middle;
+                transition: All 1s ease;
+            }
+
+            .arrow_box_2:before {
+                width: 45px;
+                height: 45px;
+                left: 100%;
+                margin-left: -25px;
+                top: 7px;
+                border: 2px solid #b83e87;
+                border-left: 1px;
+                border-bottom: 1px;
+                background: #3cd5c6;
+                content: '';
+                position: absolute;
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+                writing-mode: lr-tb;
+                border-radius: 4px 5px 4px 0;
+                background: linear-gradient(45deg, transparent 50%, #3cd5c6 50%);
+                transition: All 1s ease;
+            }

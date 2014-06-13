@@ -12,73 +12,117 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://polymerlabs.github.io/seed-element
 -->
-<polymer-element name="seed-element" attributes="notitle author">
+<polymer-element name="bgp-map-button" attributes="imageUrlSmall imageUrlLarge widthSmall widthLarge titleText">
 
-  <template>
+    <template>
 
-    <link rel="stylesheet" href="seed-element.css" />
-    
-    <h1>Hello from seed-element</h1>
-    <content></content>
+        <link rel="stylesheet" href="bgp-map-button.css"/>
 
-  </template>
+        <div>
+            <div on-click="{{elementClick}}" class="arrow_box_2">
+            <span class="img">
+                <img src="http://maps.googleapis.com/maps/api/staticmap?center=St.Gallen&zoom=12&scale=1&size=60x60&maptype=roadmap&sensor=false&format=png&visual_refresh=true"
+                     alt="Google Map of St.Gallen"/>
+            </span>
+                <span class="text">{{titleText}}</span>
+            </div>
+        </div>
+        <content></content>
 
-  <script>
+    </template>
 
-    Polymer('seed-element', {
-      /**
-       * The `author` attribute sets an initial author
-       * 
-       * @attribute author
-       * @type string
-       */
-      author: 'Dimitri Glazkov',
-      
-      /**
-       * `fancy` is a property that does something fancy.
-       * 
-       * @property fancy
-       * @type bool
-       */
-      fancy: false,
+    <script>
+        Polymer('bgp-map-button', {
 
-      ready: function() {
-        // Ready is a lifecycle callback.
-        // You can do setup work in here.
-        // More info: http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
-      },
+            /**
+             * The `imageUrlSmall` attribute sets the image url for the small image
+             *
+             * @attribute imageUrlSmall
+             * @type string
+             */
+            imageUrlSmall: '',
+            /**
+             * The `imageUrlLarge` attribute sets the image url for the large image
+             *
+             * @attribute imageUrlLarge
+             * @type string
+             */
+            imageUrlLarge: '',
+            titleText: 'Test',
+            widthSmall: '40px',
+            widthLarge: '200px',
+            ready: function () {
+                var img = this.shadowRoot.querySelector('img');
+                img.width = this.widthSmall;
+                img.height = this.widthSmall;
+            },
+            created: function () {
+                // hint that items is an array
+                this.imageUrlSmall = 'http://maps.googleapis.com/maps/api/staticmap?center=St.Gallen&zoom=12&scale=1&size=60x60&maptype=roadmap&sensor=false&format=png&visual_refresh=true';
+                this.imageUrlLarge = 'http://maps.googleapis.com/maps/api/staticmap?center=St.Gallen&zoom=12&scale=1&size=200x200&maptype=roadmap&sensor=false&format=png&visual_refresh=true';
+                this.titleText = 'Test';
+                this.widthSmall = '40px';
+                this.widthLarge = '200px';
+            },
+            titleTextChanged: function () {
+                //
+            },
+            elementClick: function () {
+                var div = this.shadowRoot.querySelector('div.arrow_box_2');
+                var img = this.shadowRoot.querySelector('img');
+                if (div.className == "arrow_box_2") {
+                    div.className = "arrow_box_2 clicked";
+                    img.src = this.imageUrlLarge;
+                    img.width = this.widthLarge;
+                    img.height = this.widthLarge;
+                }
+                else {
+                    div.className = "arrow_box_2";
+                    img.src = this.imageUrlSmall;
+                    img.width = this.widthSmall;
+                    img.height = this.widthSmall;
+                }
+            },
 
-      /**
-       * The `sayHello` method will return a greeting
-       * 
-       * @method sayHello
-       * @return {String} Returns a string greeting.
-       * @param {String} greeting Pass in a specific greeting
-       */
-      sayHello: function(greeting) {
-        var response = greeting || 'Hello World!';
-        return 'seed-element says, ' + response;
-      },
+            /**
+             * `fancy` is a property that does something fancy.
+             *
+             * @property fancy
+             * @type bool
+             */
+            fancy: false,
 
-      /**
-       * The `seed-element-lasers-success` event is fired whenever we
-       * call fireLasers.
-       * 
-       * @event seed-element-lasers-success
-       */
+            /**
+             * The `sayHello` method will return a greeting
+             *
+             * @method sayHello
+             * @return {String} Returns a string greeting.
+             * @param {String} greeting Pass in a specific greeting
+             */
+            sayHello: function (greeting) {
+                var response = greeting || 'Hello World!';
+                return 'seed-element says, ' + response;
+            },
 
-      /**
-       * The `fireLasers` method will fire the lasers. At least
-       * it will dispatch an event that claims lasers were fired :)
-       * 
-       * @method fireLasers
-       */
-      fireLasers: function() {
-        this.fire('seed-element-lasers-success', { sound: 'Pew pew pew!' });
-      }
+            /**
+             * The `seed-element-lasers-success` event is fired whenever we
+             * call fireLasers.
+             *
+             * @event seed-element-lasers-success
+             */
 
-    });
+            /**
+             * The `fireLasers` method will fire the lasers. At least
+             * it will dispatch an event that claims lasers were fired :)
+             *
+             * @method fireLasers
+             */
+            fireLasers: function () {
+                this.fire('seed-element-lasers-success', { sound: 'Pew pew pew!' });
+            }
 
-  </script>
+        });
+
+    </script>
 
 </polymer-element>
